@@ -47,7 +47,6 @@ def train_net(net,
         print('Starting epoch {}/{}.'.format(epoch + 1, epochs))
         net.train()
         
-        val = get_val_pics(image_dir, mask_dir, split_list)
         train = get_train_pics(image_dir, mask_dir, split_list)
         
         epoch_loss = 0
@@ -77,6 +76,8 @@ def train_net(net,
             optimizer.step()
         
         print('Epoch finished ! Loss: {}'.format(epoch_loss / i ))
+        
+        val = get_val_pics(image_dir, mask_dir, split_list)
         
         for i, samp in enumerate(val):
             print('*')
