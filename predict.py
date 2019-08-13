@@ -128,7 +128,7 @@ if __name__ == "__main__":
             print("Error: image height larger than the width")
 
         mask = predict_img(net=net,
-                           full_img=img,
+                           img=img,
                            scale_factor=args.scale,
                            out_threshold=args.mask_threshold,
                            use_dense_crf= not args.no_crf,
