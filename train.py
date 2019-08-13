@@ -78,6 +78,9 @@ def train_net(net,
         
         print('Epoch finished ! Loss: {}'.format(epoch_loss / i ))
         
+        for i, samp in enumerate(val):
+            print('*')
+            
         if 1:
             val_iou, val_ls = eval_net(net, val, gpu)
             print('Validation IoU: {} Loss:{}'.format(val_iou,val_ls))
