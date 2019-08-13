@@ -15,6 +15,7 @@ def eval_net(net, dataset, gpu = False):
     net.eval()
     iou = 0
     ls = 0
+    ct = 0
     for i, samp in enumerate(dataset):
         image = np.array(samp['image'])
         mask = np.array(samp['mask'])
@@ -38,5 +39,6 @@ def eval_net(net, dataset, gpu = False):
         ls+= criterion(mask_pred.view(-1),mask.view(-1)) 
 
         iou += compute_iou(mask,mask_pred_np)
+        ct+=1
     
-    return iou/(i+1), ls/(i+1)
+    return iou/ct, ls/ct
