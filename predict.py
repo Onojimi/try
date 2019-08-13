@@ -103,7 +103,7 @@ if __name__ == "__main__":
     in_files = args.input
     out_files = get_output_filenames(args)
 
-    net = Unet(n_channels=3, n_classes=1)
+    net = UNet(3,1)
     
     net = torch.nn.DataParallel(net)
 
