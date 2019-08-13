@@ -16,7 +16,6 @@ def eval_net(net, dataset, gpu = False):
     iou = 0
     ls = 0
     ct = 0
-    print(type(dataset))
     for i, samp in enumerate(dataset):
         image = np.array(samp['image'])
         mask = np.array(samp['mask'])
