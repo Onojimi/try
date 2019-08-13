@@ -24,7 +24,7 @@ class UNet(nn.Module):
     def __init__(self, input_channels, nclasses):
         super().__init__()
         #go down
-        self.conv1 = conv_twice(in_ch, 64)
+        self.conv1 = conv_twice(input_channels, 64)
         self.conv2 = conv_twice(64, 128)
         self.conv3 = conv_twice(128, 256)
         self.conv4 = conv_twice(256, 512)
@@ -41,7 +41,7 @@ class UNet(nn.Module):
         self.up_pool9 = up_pooling(128, 64)
         self.conv_up9 = conv_twice(128, 64)
         
-        self.conv_up10 = nn.Conv2d(64, n_classes, 1)
+        self.conv_up10 = nn.Conv2d(64, nclasses, 1)
         
     def forward(self, x):
         
