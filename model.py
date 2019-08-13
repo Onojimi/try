@@ -71,7 +71,7 @@ class UNet(nn.Module):
         x9 = torch.cat([p9, x1], dim = 1)
         x9 = self.conv_up9(x9)
         
-        output = self.conv10(x9)
+        output = self.conv_up10(x9)
         output = nn.Sigmoid(output)
         
         return output
