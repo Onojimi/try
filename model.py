@@ -22,7 +22,7 @@ def up_pooling(in_channels, out_channels, kernel_size = 2, stride = 2):
         )
 class UNet(nn.Module):
     def __init__(self, input_channels, nclasses):
-        super.__init__()
+        super().__init__()
         #go down
         self.conv1 = conv_twice(in_ch, 64)
         self.conv2 = conv_twice(64, 128)
