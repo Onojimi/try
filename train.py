@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 from torch import optim
 from optparse import OptionParser
+from tensorboardX import SummaryWriter
 
 def train_net(net,
               epochs = 5,
@@ -16,7 +17,8 @@ def train_net(net,
               lr = 0.1,
               val_percent = 0.1,
               save_cp = False,
-              gpu = True):
+              gpu = True,
+              writer = writer):
     
     img_dir = 'images/'
     mask_dir = 'masks/'
@@ -75,14 +77,18 @@ def train_net(net,
             loss.backward()
             optimizer.step()
         
-        print('Epoch finished ! Loss: {}'.format(epoch_loss / i ))
+        avg_train_loss = epoch_loss / i
+        print('Epoch finished ! Loss: {}'.format(avg_train_loss ))
         
         val = get_val_pics(image_dir, mask_dir, split_list)
             
         if 1:
             val_iou, val_ls = eval_net(net, val, gpu)
             print('Validation IoU: {} Loss:{}'.format(val_iou,val_ls))
-
+        
+        writer.add_scalar('train/loss', avg_train_loss, i)
+        writer.add_scalar('val/loss', val_ls, i )
+        writer.add_scalar('val/IoU', val_iou, i )
 #         if save_cp:
 #             torch.save(net.state_dict(),
 #             checkpoint_dir + 'CP{}.pth'.format(epoch + 1))
@@ -110,7 +116,7 @@ if __name__ == '__main__':
     args = get_args()
 #     os.environ["CUDA_VISIBLE_DEVICES"] = '0'
     net = UNet(input_channels=3, nclasses=1)
-    
+    writer = SummaryWriter(log_dir='/log', comment='unet')
 #     net.cuda()
 #     import pdb
 #     from torchsummary import summary 
@@ -131,9 +137,12 @@ if __name__ == '__main__':
                   batch_size = args.batchsize, 
                   lr = args.lr, 
                   gpu = args.gpu, 
+                  writer = writer
                   )
         torch.save(net.state_dict(),'model_fin.pth')
         
+        
+    
     except KeyboardInterrupt:
         torch.save(net.state_dict(),'interrupt.pth')
         print('saved interrupt')
