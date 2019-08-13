@@ -40,7 +40,6 @@ def train_net(net,
     N_train = len(split_list['train'])
     optimizer = optim.Adam(net.parameters(), 
                             lr=lr, 
-                            momentum = 0.9,
                             weight_decay=0.005)
     criterion = nn.BCELoss()
     
