@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 def conv_twice(in_channels, out_channels, kernel_size = 3, stride = 1, padding = 1):
     return nn.Sequential(
@@ -72,6 +73,6 @@ class UNet(nn.Module):
         x9 = self.conv_up9(x9)
         
         output = self.conv_up10(x9)
-        output = nn.Sigmoid(output)
+        output = F.Sigmoid(output)
         
         return output
