@@ -77,6 +77,15 @@ def train_net(net,
             optimizer.step()
         
         print('Epoch finished ! Loss: {}'.format(epoch_loss / i ))
+        
+        if 1:
+            val_iou, val_ls = eval_net(net, val, gpu)
+            print('Validation IoU: {} Loss:{}'.format(val_iou,val_ls))
+
+#         if save_cp:
+#             torch.save(net.state_dict(),
+#             checkpoint_dir + 'CP{}.pth'.format(epoch + 1))
+#             print('Checkpoint {} saved !'.format(epoch + 1))
     
 def get_args():
     parser = OptionParser()
