@@ -95,4 +95,40 @@ def get_args():
                       help = 'downscaling factor of the images') 
     
     (options, args) = parser.parse_args() 
-    return options          
+    return options 
+
+if __name__ == '__main__':
+    args = get_args()
+#     os.environ["CUDA_VISIBLE_DEVICES"] = '0'
+    net = UNet(input_channels=3, nclasses=1)
+    
+#     net.cuda()
+#     import pdb
+#     from torchsummary import summary 
+#     summary(net, (3,1000,1000))
+#     pdb.set_trace()
+    if args.load:
+        net.load_state_dict(torch.load(args.load))
+        print('Model loaded from {}'.format(args.load))
+        
+    if args.gpu:
+        if torch.cuda.device_count()>1:
+            net = nn.DataParallel(net)
+        net.cuda()
+        
+    try:
+        train_net(net = net, 
+                  epochs = args.epochs,
+                  batch_size = args.batchsize, 
+                  lr = args.lr, 
+                  gpu = args.gpu, 
+                  img_scale = args.scale)
+        torch.save(net.state_dict(),'model_fin.pth')
+        
+    except KeyboardInterrupt:
+        torch.save(net.state_dict(),'interrupt.pth')
+        print('saved interrupt')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)         
