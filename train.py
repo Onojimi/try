@@ -18,7 +18,7 @@ def train_net(net,
               val_percent = 0.1,
               save_cp = False,
               gpu = True,
-              writer = writer):
+              writer):
     
     img_dir = 'images/'
     mask_dir = 'masks/'
