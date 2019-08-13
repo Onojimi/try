@@ -29,7 +29,7 @@ class UNet(nn.Module):
         self.conv3 = conv_twice(128, 256)
         self.conv4 = conv_twice(256, 512)
         self.conv5 = conv_twice(512, 1024)
-        self.down_pooing = nn.MaxPool2d(2)
+        self.down_pooling = nn.MaxPool2d(2)
         
         #go up
         self.up_pool6 = up_pooling(1024, 512)
@@ -46,13 +46,13 @@ class UNet(nn.Module):
     def forward(self, x):
         
         x1 = self.conv1(x)
-        p1 = self.down_pooing(x1)
+        p1 = self.down_pooling(x1)
         x2 = self.conv2(p1)
-        p2 = self.down_pooing(x2)
+        p2 = self.down_pooling(x2)
         x3 = self.conv3(p2)
         p3 = self.down_pooling(x3)
         x4 = self.conv4(p3)
-        p4 = self.down_pooing(x4)
+        p4 = self.down_pooling(x4)
         x5 = self.conv5(p4)
         
         p6 = self.conv_up6(x5)
