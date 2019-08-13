@@ -73,6 +73,6 @@ class UNet(nn.Module):
         x9 = self.conv_up9(x9)
         
         output = self.conv_up10(x9)
-        output = F.Sigmoid(output)
+        output = F.sigmoid(output)
         
         return output
