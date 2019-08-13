@@ -67,7 +67,7 @@ class UNet(nn.Module):
         x8 = torch.cat([p8, x2], dim = 1)
         x8 = self.conv_up8(x8)
         
-        p9 = self.up_poolp9(x8)
+        p9 = self.up_pool9(x8)
         x9 = torch.cat([p9, x1], dim = 1)
         x9 = self.conv_up9(x9)
         
