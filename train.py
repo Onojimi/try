@@ -12,13 +12,14 @@ from optparse import OptionParser
 from tensorboardX import SummaryWriter
 
 def train_net(net,
+              writer,
               epochs = 5,
               batch_size = 1,
               lr = 0.1,
               val_percent = 0.1,
               save_cp = False,
               gpu = True,
-              writer):
+              ):
     
     img_dir = 'images/'
     mask_dir = 'masks/'
