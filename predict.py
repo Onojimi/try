@@ -16,7 +16,9 @@ def predict_img(net,
                 use_dense_crf = False,
                 use_gpu = True):
     net.eval()
+    img_height = img.size[0]
     img = np.array(img)
+    
     img = normalize(img)
     img = np.transpose(img, [2,0,1])
     img = torch.from_numpy(img).unsqueeze(0).type(torch.FloatTensor)
