@@ -50,7 +50,7 @@ class UNet(nn.Module):
         x2 = self.conv2(p1)
         p2 = self.down_pooing(x2)
         x3 = self.conv3(p2)
-        p3 = self.downpooling(x3)
+        p3 = self.down_pooling(x3)
         x4 = self.conv4(p3)
         p4 = self.down_pooing(x4)
         x5 = self.conv5(p4)
