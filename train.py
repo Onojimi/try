@@ -56,8 +56,8 @@ def train_net(net,
             images = np.array([samp['image'] for samp in samps])
             masks = np.array([samp['mask'] for samp in samps])
     
-            images = torch.from_numpy(images)
-            masks = torch.from_numpy(masks)
+            images = torch.from_numpy(images).type(torch.FloatTensor)
+            masks = torch.from_numpy(masks).type(torch.FloatTensor)
             
             if gpu:
                 images = images.cuda()
