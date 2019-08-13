@@ -62,11 +62,10 @@ split_list = train_val_split(name_list, 0.1)
 val = get_val_pics(image_dir, mask_dir, split_list)
 train = get_train_pics(image_dir, mask_dir, split_list)
 
-for i, samps in enumerate(val):
-    images = np.array(samps['image'])
-    masks = np.array(samps['mask'])
+# for i, samps in enumerate(val):
+#     images = np.array(samps['image'])
+#     masks = np.array(samps['mask'])
+#     
+#     images = torch.from_numpy(images)
+#     masks = torch.from_numpy(masks)
     
-    images = torch.from_numpy(images)
-    masks = torch.from_numpy(masks)
-    
-    print(images.shape)
