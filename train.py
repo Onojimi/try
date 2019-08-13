@@ -76,7 +76,7 @@ def train_net(net,
             loss.backward()
             optimizer.step()
         
-            print('Epoch finished ! Loss: {}'.format(epoch_loss / i))
+        print('Epoch finished ! Loss: {}'.format(epoch_loss / i ))
     
 def get_args():
     parser = OptionParser()
