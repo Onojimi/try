@@ -51,7 +51,7 @@ def train_net(net,
         
         epoch_loss = 0
         
-        for i, samps in enumerate(batch(val, batch_size)):
+        for i, samps in enumerate(batch(train, batch_size)):
             images = np.array([samp['image'] for samp in samps])
             masks = np.array([samp['mask'] for samp in samps])
     
@@ -78,9 +78,6 @@ def train_net(net,
         print('Epoch finished ! Loss: {}'.format(epoch_loss / i ))
         
         val = get_val_pics(image_dir, mask_dir, split_list)
-        
-        for i, samp in enumerate(val):
-            print('*')
             
         if 1:
             val_iou, val_ls = eval_net(net, val, gpu)
