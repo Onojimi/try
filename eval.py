@@ -19,8 +19,8 @@ def eval_net(net, dataset, gpu = False):
         image = np.array(samp['image'])
         mask = np.array(samp['mask'])
         
-        image = torch.from_numpy(image)
-        mask = torch.from_numpy(mask)
+        image = torch.from_numpy(image).type(torch.FloatTensor)
+        mask = torch.from_numpy(mask).type(torch.FloatTensor)
         
         image = image.unsqueeze(0)
         
