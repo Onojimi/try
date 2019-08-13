@@ -7,7 +7,7 @@ import torch
 
 from model import UNet
 from util import *
-
+from torchvision import transforms
 
 def predict_img(net,
                 img,
