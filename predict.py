@@ -10,7 +10,7 @@ from util import *
 
 
 def predict_img(net,
-                full_img,
+                img,
                 scale_factor = 1,
                 out_threshold = 0.5,
                 use_dense_crf = False,
