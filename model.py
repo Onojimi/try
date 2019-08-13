@@ -55,19 +55,19 @@ class UNet(nn.Module):
         p4 = self.down_pooling(x4)
         x5 = self.conv5(p4)
         
-        p6 = self.conv_up6(x5)
+        p6 = self.up_pool6(x5)
         x6 = torch.cat([p6, x4], dim = 1)
         x6 = self.conv_up6(x6)
         
-        p7 = self.conv_up7(x6)
+        p7 = self.up_pool7(x6)
         x7 = torch.cat([p7, x3], dim = 1)
         x7 = self.conv_up7(x7)
         
-        p8 = self.conv_up8(x7)
+        p8 = self.up_pool8(x7)
         x8 = torch.cat([p8, x2], dim = 1)
         x8 = self.conv_up8(x8)
         
-        p9 = self.conv_up9(x8)
+        p9 = self.up_poolp9(x8)
         x9 = torch.cat([p9, x1], dim = 1)
         x9 = self.conv_up9(x9)
         
