@@ -13,6 +13,7 @@ class mixloss(nn.Module):
         
         dice_loss = torch.zeros(0, dtype = torch.float32)
         dice_loss += (2 * inter.float() + self.eps) / union.float()
+        print(pred_mask, true_mask)
         bce_loss = nn.BCELoss(pred_mask, true_mask)
         
         mix_loss = bce_loss + (1 - dice_loss)
