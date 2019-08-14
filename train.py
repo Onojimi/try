@@ -4,6 +4,7 @@ import os
 from model import UNet
 from eval import eval_net
 from util import *
+from combineloss import mixloss
 
 import torch
 import torch.nn as nn
@@ -21,7 +22,7 @@ def train_net(net,
               gpu = True,
               ):
     
-    img_dir = 'images/'
+    image_dir = 'images/'
     mask_dir = 'masks/'
     checkpoint_dir ='checkpoints/'
     
@@ -44,7 +45,7 @@ def train_net(net,
     optimizer = optim.Adam(net.parameters(), 
                             lr=lr, 
                             weight_decay=0.005)
-    criterion = nn.BCELoss()
+    criterion = mixloss()
     
     for epoch in range(epochs):
         print('Starting epoch {}/{}.'.format(epoch + 1, epochs))
