@@ -3,3 +3,4 @@ masks/
 log/
 
 *.pyc
+*.ipynb
