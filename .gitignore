@@ -2,3 +2,4 @@ images/
 masks/
 log/
 
+*.pyc
