@@ -91,10 +91,10 @@ def train_net(net,
         writer.add_scalar('train/loss', avg_train_loss, epoch)
         writer.add_scalar('val/loss', val_ls, epoch )
         writer.add_scalar('val/IoU', val_iou, epoch )
-#         if save_cp:
-#             torch.save(net.state_dict(),
-#             checkpoint_dir + 'CP{}.pth'.format(epoch + 1))
-#             print('Checkpoint {} saved !'.format(epoch + 1))
+
+        torch.save(net.state_dict(),
+        checkpoint_dir + 'CP{}.pth'.format(epoch + 1))
+        print('Checkpoint {} saved !'.format(epoch + 1))
     
 def get_args():
     parser = OptionParser()
