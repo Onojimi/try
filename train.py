@@ -45,7 +45,7 @@ def train_net(net,
     optimizer = optim.Adam(net.parameters(), 
                             lr=lr, 
                             weight_decay=0.005)
-    criterion = mixloss()
+    criterion = nn.BCELoss()
     
     for epoch in range(epochs):
         print('Starting epoch {}/{}.'.format(epoch + 1, epochs))
