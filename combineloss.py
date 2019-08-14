@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class mixloss(nn.Module):
-    def __init__(self, pred_mask, true_mask):
+    def __init__(self):
         super(mixloss, self).__init__()
         self.eps = 0.01
 
