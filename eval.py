@@ -6,9 +6,9 @@ def compute_iou(true, pred):
     true_mask = np.asanyarray(true.cpu(), dtype = np.bool)
     pred_mask = np.asanyarray(pred, dtype = np.bool)
     print(true_mask, pred_mask)
-    union = np.sum(np.logical_or(true_mask, pred_mask))
-    intersection = np.sum(np.logical_and(true_mask, pred_mask))
-    print(type(union), type(intersection))
+    union = sum(np.logical_or(true_mask, pred_mask))
+    intersection = sum(np.logical_and(true_mask, pred_mask))
+    print(union, intersection)
     iou = intersection/union
     return iou
 
@@ -40,7 +40,7 @@ def eval_net(net, dataset, gpu = False):
         
         ls+= criterion(mask_pred.view(-1),mask.view(-1)) 
 
-        iou += compute_iou(mask,mask_pred_np)
+        iou += compute_iou(mask, mask_pred_np)
         ct+=1
     
     return iou/ct, ls/ct
