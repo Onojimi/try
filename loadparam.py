@@ -5,7 +5,7 @@ from torch import optim
 from model import UNet
 from torchvision import models
 
-model = UNet()
+model = UNet(3,1)
 model = nn.DataParallel(model)
 model_dict = model.state_dict()
 pretrained_dict = torch.load('CP50.pth')
