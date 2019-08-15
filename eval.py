@@ -8,7 +8,7 @@ def compute_iou(true, pred):
     print(true_mask, pred_mask)
     union = np.sum(np.logical_or(true_mask, pred_mask))
     intersection = np.sum(np.logical_and(true_mask, pred_mask))
-    print(union, intersection)
+    print(type(union), type(intersection))
     iou = intersection/union
     return iou
 
