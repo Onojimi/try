@@ -126,9 +126,9 @@ if __name__ == '__main__':
 #     summary(net, (3,1000,1000))
 #     pdb.set_trace()
     if args.load:
-        print('Model loaded from {}'.format(args.model))
+        print('Model loaded from {}'.format(args.load))
         net.load_state_dict(torch.load('CP50.pth'))
-        print('Model loaded from {}'.format(args.model))
+        print('Model loaded from {}'.format(args.load))
         
     if args.gpu:
         if torch.cuda.device_count()>1:
