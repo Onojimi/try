@@ -24,8 +24,8 @@ def train_net(net,
               gpu = True,
               ):
     
-    image_dir = 'images/'
-    mask_dir = 'masks/'
+    image_dir = 'images_cut/'
+    mask_dir = 'masks_cut/'
     checkpoint_dir ='checkpoints/'
     
     name_list = get_names(image_dir)
