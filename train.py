@@ -108,10 +108,8 @@ def get_args():
                       help = 'learning rate')
     parser.add_option('-g', '--gpu', dest = 'gpu', action = 'store_true', default = True, 
                       help = 'use cuda') 
-    parser.add_argument('--model', '-m', default='model_fin.pth',
-                        metavar='FILE',
-                        help="Specify the file in which is stored the model"
-                             " (default : 'model_fin.pth')")
+    parser.add_option('-c', '--load', dest = 'load', default = False,
+                      help = 'load file model')
     parser.add_option('-s', '--scale', dest = 'scale', default = 1, type = float,
                       help = 'downscaling factor of the images') 
     (options, args) = parser.parse_args() 
@@ -127,9 +125,9 @@ if __name__ == '__main__':
 #     from torchsummary import summary 
 #     summary(net, (3,1000,1000))
 #     pdb.set_trace()
-    if args.model is not 'N':
-        print(args.model)
-        net.load_state_dict(torch.load(args.model))
+    if args.load:
+        print('Model loaded from {}'.format(args.model))
+        net.load_state_dict(torch.load('CP50.pth'))
         print('Model loaded from {}'.format(args.model))
         
     if args.gpu:
