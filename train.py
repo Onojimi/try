@@ -112,7 +112,9 @@ def get_args():
                       help = 'load file model')
     parser.add_option('-s', '--scale', dest = 'scale', default = 1, type = float,
                       help = 'downscaling factor of the images') 
-    
+    parser.add_option('-m', '--model', dest = 'model', metavar='FILE',
+                      default='model_fin.pth',
+                      help = 'finetuning') 
     (options, args) = parser.parse_args() 
     return options 
 
@@ -127,8 +129,8 @@ if __name__ == '__main__':
 #     summary(net, (3,1000,1000))
 #     pdb.set_trace()
     if args.load:
-        net.load_state_dict(torch.load(args.load))
-        print('Model loaded from {}'.format(args.load))
+        net.load_state_dict(torch.load(args.model))
+        print('Model loaded from {}'.format(args.model))
         
     if args.gpu:
         if torch.cuda.device_count()>1:
