@@ -18,5 +18,5 @@ model.load_state_dict(model_dict)
 for k, v in model.named_parameters():
     pref = k[:12]
     print(pref)
-    if pref is not 'module.conv1':
+    if not pref == 'module.conv1':
         print(k)
