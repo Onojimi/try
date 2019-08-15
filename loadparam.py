@@ -16,11 +16,11 @@ model_dict.update(pretrained_dict)
 model.load_state_dict(model_dict)
 train_params = []
 for k, v in model.named_parameters():
-    train_params.append(v)
+    train_params.append(k)
     pref = k[:12]
     print(pref)
     if pref == 'module.conv1' or pref == 'module.conv2' :
         v.requires_grad=False
-        train_params.remove(v)
+        train_params.remove(k)
         
 print(train_params)
