@@ -127,7 +127,7 @@ if __name__ == '__main__':
     args = get_args()
 #     os.environ["CUDA_VISIBLE_DEVICES"] = '0'
     net = UNet(input_channels=3, nclasses=1)
-    writer = SummaryWriter(log_dir='../../log/color', comment='unet')
+    writer = SummaryWriter(log_dir='../../log/color2', comment='unet')
 #     net.cuda()
 #     import pdb
 #     from torchsummary import summary 
