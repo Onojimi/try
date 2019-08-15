@@ -16,6 +16,7 @@ from tensorboardX import SummaryWriter
 
 def train_net(net,
               writer,
+              load,
               epochs = 5,
               batch_size = 1,
               lr = 0.1,
@@ -42,7 +43,10 @@ def train_net(net,
         CUDA: {}
     '''.format(epochs, batch_size, lr, len(split_list['train']),
                len(split_list['val']), str(save_cp), str(gpu)))
-    
+    if load:
+            print('Model loaded from {}'.format(args.load))
+            net.load_state_dict(torch.load('CP50.pth'))
+            print('Model loaded from {}'.format(args.load))
     N_train = len(split_list['train'])
     optimizer = optim.Adam(net.parameters(), 
                             lr=lr, 
@@ -125,10 +129,7 @@ if __name__ == '__main__':
 #     from torchsummary import summary 
 #     summary(net, (3,1000,1000))
 #     pdb.set_trace()
-    if args.load:
-        print('Model loaded from {}'.format(args.load))
-        net.load_state_dict(torch.load('CP50.pth'))
-        print('Model loaded from {}'.format(args.load))
+   
         
     if args.gpu:
         if torch.cuda.device_count()>1:
@@ -141,8 +142,10 @@ if __name__ == '__main__':
                   batch_size = args.batchsize, 
                   lr = args.lr, 
                   gpu = args.gpu, 
-                  writer = writer
+                  writer = writer,
+                  load = args.load
                   )
+        
         torch.save(net.state_dict(),'model_fin.pth')
         
         
