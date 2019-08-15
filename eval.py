@@ -5,6 +5,7 @@ import numpy as np
 def compute_iou(true, pred):
     true_mask = np.asanyarray(true.cpu(), dtype = np.bool)
     pred_mask = np.asanyarray(pred, dtype = np.bool)
+    print(true_mask.size, pred_mask.size)
     union = np.sum(np.logical_or(true_mask, pred_mask))
     intersection = np.sum(np.logical_and(true_mask, pred_mask))
     iou = intersection/union
