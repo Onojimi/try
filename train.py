@@ -3,11 +3,13 @@ import os
 
 from model import UNet
 from eval import eval_net
-from util import *
+from util import get_names, train_val_split, get_val_pics, get_train_pics, batch
+                    
 from combineloss import mixloss
 
 import torch
 import torch.nn as nn
+import numpy as np
 from torch import optim
 from optparse import OptionParser
 from tensorboardX import SummaryWriter
