@@ -43,18 +43,30 @@ def train_net(net,
         CUDA: {}
     '''.format(epochs, batch_size, lr, len(split_list['train']),
                len(split_list['val']), str(save_cp), str(gpu)))
-    if load:
-            print('Model loaded from {}'.format(args.load))
-            net.load_state_dict(torch.load('CP50.pth'))
-            for count, (n, level) in enumerate(net.named_children()):
-                if count <= 1:
-                    for p in level.parameters():
-                        p.requires_grad = False
-            
     N_train = len(split_list['train'])
     optimizer = optim.Adam(net.parameters(), 
                             lr=lr, 
                             weight_decay=0.005)
+    if load:
+        print('Model loaded from {}'.format(args.load))
+        model_dict = net.state_dict()
+        pretrained_dict = torch.load('CP50.pth')
+        pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
+        
+        model_dict.update(pretrained_dict)
+        net.load_state_dict(model_dict)
+        train_params = []
+        for k, v in net.named_parameters():
+            train_params.append(k)
+            pref = k[:12]
+            if pref == 'module.conv1' or pref == 'module.conv2' :
+                v.requires_grad=False
+                train_params.remove(k)
+        
+        optimizer = optim.Adam(params=train_params,
+                               lr=lr,
+                               weight_decay=0.005)    
+    
     criterion = mixloss()
     
     for epoch in range(epochs):
