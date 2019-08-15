@@ -16,8 +16,6 @@ model_dict.update(pretrained_dict)
 model.load_state_dict(model_dict)
 
 for k, v in model.named_parameters():
-    pref = k[:11]
-    print(pref)
-    if pref is not 'module.conv0':
-        if pref is not 'module.conv1':
-            print(k)
+    pref = k[:12]
+    if pref is not 'module.conv1' or 'module.conv2':
+        print(k)
