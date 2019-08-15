@@ -46,7 +46,11 @@ def train_net(net,
     if load:
             print('Model loaded from {}'.format(args.load))
             net.load_state_dict(torch.load('CP50.pth'))
-            print('Model loaded from {}'.format(args.load))
+            for count, (n, level) in enumerate(net.named_children()):
+                if count <= 1:
+                    for p in level.parameters():
+                        p.requires_grad = False
+            
     N_train = len(split_list['train'])
     optimizer = optim.Adam(net.parameters(), 
                             lr=lr, 
