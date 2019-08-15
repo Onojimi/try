@@ -22,5 +22,7 @@ for k, v in model.named_parameters():
     if pref == 'module.conv1' or pref == 'module.conv2' :
         v.requires_grad=False
         train_params.remove(k)
-        
-print(train_params)
+
+for k, v in model.named_parameters():
+    if k not in train_params:
+        print(v.requires_grad)    
