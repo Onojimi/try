@@ -47,9 +47,9 @@ class UNet(nn.Module):
     def forward(self, x):
         
         x1 = self.conv1(x)
-        p1 = self.down_pooling(x1)
+        p1 = self.down_poolingx(x1)
         x2 = self.conv2(p1)
-        p2 = self.down_pooling(x2)
+        p2 = self.down_poolingx(x2)
         x3 = self.conv3x(p2)
         p3 = self.down_poolingx(x3)
         x4 = self.conv4x(p3)
