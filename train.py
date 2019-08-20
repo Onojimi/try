@@ -47,15 +47,15 @@ def train_net(net,
     optimizer = optim.Adam(net.parameters(), 
                             lr=lr, 
                             weight_decay=0.005)
+    
+    print('Model loaded from {}'.format(args.load))
+    model_dict = net.state_dict()
+    pretrained_dict = torch.load('CP50.pth')
+#        pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}        
+    model_dict.update(pretrained_dict)
+    net.load_state_dict(model_dict)
+    train_params = []
     if load:
-        print('Model loaded from {}'.format(args.load))
-        model_dict = net.state_dict()
-        pretrained_dict = torch.load('CP50.pth')
-        pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
-        
-        model_dict.update(pretrained_dict)
-        net.load_state_dict(model_dict)
-        train_params = []
         for k, v in net.named_parameters():
             train_params.append(k)
             pref = k[:12]
