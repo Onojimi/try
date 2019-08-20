@@ -53,11 +53,11 @@ def batch(itera, batch_size):
     if len(bat) > 0:
         yield bat
  
-img = Image.open('test.png')   
-img_np = np.array(img)
-img_np = img_np[:,:,:3]
-img = Image.fromarray(img_np)
-img.save('test.png')
+# img = Image.open('test.png')   
+# img_np = np.array(img)
+# img_np = img_np[:,:,:3]
+# img = Image.fromarray(img_np)
+# img.save('test.png')
 # image_dir = 'images/'
 # mask_dir = 'masks/'
 # 
