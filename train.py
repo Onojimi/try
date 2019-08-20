@@ -50,12 +50,13 @@ def train_net(net,
     
     print('Model loaded from {}'.format(args.load))
     model_dict = net.state_dict()
-    pretrained_dict = torch.load('CP50.pth')
+    pretrained_dict = torch.load(args.load)
 #        pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}        
     model_dict.update(pretrained_dict)
     net.load_state_dict(model_dict)
     train_params = []
-    if load:
+    if args.fix:
+        print("fixing parameters")
         for k, v in net.named_parameters():
             train_params.append(k)
             pref = k[:12]
@@ -127,6 +128,8 @@ def get_args():
     parser.add_option('-l', '--learning-rate', dest = 'lr', default = 0.1, type = float,
                       help = 'learning rate')
     parser.add_option('-g', '--gpu', dest = 'gpu', action = 'store_true', default = True, 
+                      help = 'use cuda') 
+    parser.add_option('-f', '--fix', dest = 'fix', action = 'store_true', default = True, 
                       help = 'use cuda') 
     parser.add_option('-c', '--load', dest = 'load', default = False,
                       help = 'load file model')
