@@ -63,7 +63,7 @@ def train_net(net,
                 v.requires_grad=False
                 train_params.remove(k)
         
-        optimizer = optim.Adam(params=train_params,
+        optimizer = optim.Adam(filter(lambda p: p.requires_grad, net.parameters()),
                                lr=lr,
                                weight_decay=0.005)    
     
