@@ -34,7 +34,7 @@ def get_train_pics(dir_img, dir_mask, split_data):
         img = np.array(Image.open(dir_img + b + '.png').convert('RGB'))
         img = normalize(np.transpose(img, [2,0,1]))
         
-        mask = np.array(Image.open(dir_mask + b + '_mask.png').convert('L'))
+        mask = np.array(Image.open(dir_mask + b + '.png').convert('L'))
         mask = normalize(mask)
         
         yield {'image':img, 'mask' : mask}
@@ -52,20 +52,26 @@ def batch(itera, batch_size):
     
     if len(bat) > 0:
         yield bat
-        
-image_dir = 'images/'
-mask_dir = 'masks/'
-
-name_list = get_names(image_dir)
-split_list = train_val_split(name_list, 0.1)
-
-val = get_val_pics(image_dir, mask_dir, split_list)
-train = get_train_pics(image_dir, mask_dir, split_list)
-
+ 
+img = Image.open('test.png')   
+img_np = np.array(img)
+img_np = img_np[:,:,:3]
+img = Image.fromarray(img_np)
+img.save('test.png')
+# image_dir = 'images/'
+# mask_dir = 'masks/'
+# 
+# name_list = get_names(image_dir)
+# split_list = train_val_split(name_list, 0.1)
+# 
+# val = get_val_pics(image_dir, mask_dir, split_list)
+# train = get_train_pics(image_dir, mask_dir, split_list)
+# 
 # for i, samps in enumerate(val):
+#     print('x')
 #     images = np.array(samps['image'])
 #     masks = np.array(samps['mask'])
-#     
+#      
 #     images = torch.from_numpy(images)
 #     masks = torch.from_numpy(masks)
-    
+#     
