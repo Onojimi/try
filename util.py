@@ -23,7 +23,7 @@ def get_val_pics(dir_img, dir_mask, split_data):
         img = np.array(Image.open(dir_img + b + '.png').convert('RGB'))
         img = normalize(np.transpose(img, [2,0,1]))
         
-        mask = np.array(Image.open(dir_mask + b + '.png').convert('L'))
+        mask = np.array(Image.open(dir_mask + b + '_mask.png').convert('L'))
         mask = normalize(mask)
         
         yield {'image':img, 'mask' : mask}
@@ -34,7 +34,7 @@ def get_train_pics(dir_img, dir_mask, split_data):
         img = np.array(Image.open(dir_img + b + '.png').convert('RGB'))
         img = normalize(np.transpose(img, [2,0,1]))
         
-        mask = np.array(Image.open(dir_mask + b + '.png').convert('L'))
+        mask = np.array(Image.open(dir_mask + b + '_mask.png').convert('L'))
         mask = normalize(mask)
         
         yield {'image':img, 'mask' : mask}
